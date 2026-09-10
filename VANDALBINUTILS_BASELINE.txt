@@ -1,32 +1,31 @@
 VandalBinUtils upstream baseline
 
-GNU binutils and GDB (shared upstream repository):
+GNU binutils (shared upstream repository with GDB):
   Upstream repository: git://sourceware.org/git/binutils-gdb.git
   Baseline tag: binutils-2_47
   Baseline commit: 6ce87bbc521cf46eaee9a1f7ef61cee2cdfb3e32
   Baseline date: 2026-07-26
 
-Important note on the binutils/gdb version pairing:
+Scope of this repository:
   binutils and GDB are developed in the same upstream repository but are
-  tagged and released independently. `binutils-2_47` (2026-07-26) and
-  `gdb-17.2-release` (2026-05-10) are DIFFERENT commits on this repository,
-  not two points on the same line of history.
+  tagged and released independently. This repository is pinned to the
+  official `binutils-2_47` release tag, so its full working tree (including
+  the `gdb/` subdirectory that ships as part of the same source tree) is
+  exactly what upstream tagged as binutils 2.47.
 
-  This repository is pinned to a single commit, `binutils-2_47`, chosen as
-  the later of the two release tags. Its `binutils/` subdirectory is
-  therefore exactly the official binutils 2.47 release. Its `gdb/`
-  subdirectory is whatever GDB source was in-tree as of that same commit --
-  which is at or beyond the 17.2 release point, but is NOT byte-identical
-  to the official `gdb-17.2-release` tag.
+  GDB is intentionally NOT built from this repository. It has its own fork,
+  VandalGDB, pinned separately to the official `gdb-17.2-release` tag on the
+  same upstream repository. An earlier revision of this repository tried to
+  serve both tools from one shared commit; that meant one of the two tools
+  was never at its own exact official release point, so the two were split.
 
-  Build scripts and version metadata for VandalSDK should be updated to
-  reflect that both binutils and GDB are now built from this single shared
-  commit, rather than tracking two independently pinned release tags as
-  they did previously.
+  Build scripts and version metadata for VandalSDK should treat VandalBinUtils
+  and VandalGDB as two independently versioned toolchain components, each
+  updated on its own schedule.
 
 This repository was forked directly from the upstream binutils-gdb git
 repository at the commit above; full upstream history is preserved (a
 non-shallow fetch of ~1.18M objects completed successfully), and the
 upstream remote is retained locally as `binutils-gdb-upstream` so later
-releases can be pulled with a normal
+binutils releases can be pulled with a normal
 `git fetch binutils-gdb-upstream <tag>`.
