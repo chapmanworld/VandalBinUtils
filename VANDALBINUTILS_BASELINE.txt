@@ -1,0 +1,32 @@
+VandalBinUtils upstream baseline
+
+GNU binutils and GDB (shared upstream repository):
+  Upstream repository: git://sourceware.org/git/binutils-gdb.git
+  Baseline tag: binutils-2_47
+  Baseline commit: 6ce87bbc521cf46eaee9a1f7ef61cee2cdfb3e32
+  Baseline date: 2026-07-26
+
+Important note on the binutils/gdb version pairing:
+  binutils and GDB are developed in the same upstream repository but are
+  tagged and released independently. `binutils-2_47` (2026-07-26) and
+  `gdb-17.2-release` (2026-05-10) are DIFFERENT commits on this repository,
+  not two points on the same line of history.
+
+  This repository is pinned to a single commit, `binutils-2_47`, chosen as
+  the later of the two release tags. Its `binutils/` subdirectory is
+  therefore exactly the official binutils 2.47 release. Its `gdb/`
+  subdirectory is whatever GDB source was in-tree as of that same commit --
+  which is at or beyond the 17.2 release point, but is NOT byte-identical
+  to the official `gdb-17.2-release` tag.
+
+  Build scripts and version metadata for VandalSDK should be updated to
+  reflect that both binutils and GDB are now built from this single shared
+  commit, rather than tracking two independently pinned release tags as
+  they did previously.
+
+This repository was forked directly from the upstream binutils-gdb git
+repository at the commit above; full upstream history is preserved (a
+non-shallow fetch of ~1.18M objects completed successfully), and the
+upstream remote is retained locally as `binutils-gdb-upstream` so later
+releases can be pulled with a normal
+`git fetch binutils-gdb-upstream <tag>`.
